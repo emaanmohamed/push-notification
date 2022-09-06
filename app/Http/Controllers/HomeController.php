@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewNotification;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -39,7 +40,13 @@ class HomeController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->post_content
         ]);
+        $data = [
+            'user_id' => Auth::id(),
+            'comment' => $request->post_content,
+            'post_id' => $request->post_id,
+        ];
 
+        event(new NewNotification($data));
         return redirect()->back()->with(['success' => 'تم اضافه تعليقك بنجاح']);
     }
 }

@@ -127,4 +127,6 @@
         cluster: 'mt1'
     });
 </script>
+<script src="{{ asset('js/pusherNotifications.js') }}"></script>
+
 </html>
